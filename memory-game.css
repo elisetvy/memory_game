@@ -1,0 +1,107 @@
+/* you can add to or change this. */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url(./Assets/SpaceGrotesk-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url(./Assets/Caveat-VariableFont_wght.ttf);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-1px);
+  }
+  75% {
+    transform: translateX(1px);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Space Grotesk';
+  text-align: center;
+}
+
+body {
+  margin: 1rem 2rem;
+}
+
+#jay {
+  margin: 1rem 2rem;
+  height: 20vh;
+}
+
+h1 {
+  margin: 0 2rem 1rem;
+  padding: 0;
+}
+
+.info {
+  border: 1px solid black;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  width: max(27.5rem, 50vw);
+}
+
+#easy-msg, #medium-msg, #hard-msg {
+  border: 1px solid black;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  width: fit-content;
+}
+
+.levels-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#game {
+  padding: 1rem 2rem;
+}
+
+#game div {
+  border: 1px solid black;
+  width: 6.25rem;
+  height: 6.25rem;
+  margin: 1.25rem;
+  display: inline-block;
+}
+
+#score {
+  padding: 0 2rem;
+  font-weight: 900;
+}
+
+.finish {
+  border: 1px solid black;
+  margin: 2.25rem auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: fit-content;
+}
+
+#finish-msg {
+  margin: 0;
+}
+
+#start-over {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.hide {
+  display: none;
+}
+
+.shake {
+  animation: shake 0.15s ease-in-out 2;
+}

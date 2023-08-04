@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Let's Feed Jay - A Memory Game!</title>
+  <link rel="stylesheet" href="memory-game.css" />
+</head>
+
+<body>
+  <img id="jay" src="./Assets/Jay11.png">
+  <h1>Let's Feed Jay!</h1>
+  <div class="info" id="info">
+    <p>
+      You will be shown a number of cards. Each card you click on will
+      reveal an adorable picture of Jay. You need to find the other card with the matching picture of Jay.<br><br>
+      For every pair of cards you click on that is a match, you add
+      1
+      pebble of food to Jay's dinner. For every pair that is not a match, you take away 1 pebble from his
+      dinner.<br><br>
+      Your
+      goal is to make sure Jay has enough to eat to make it through the night.</p>
+  </div>
+  <div class="levels" id="levels">
+    <p><strong>Choose a level:</strong></p>
+    <div class="levels-buttons">
+      <button id="easy">EASY</button>
+      <button id="medium">MEDIUM</button>
+      <button id="hard">HARD</button>
+    </div>
+  </div>
+  <div class="hide" id="easy-msg">Difficulty: <strong>EASY</strong><br><br>Jay needs at least <strong>1 pebble</strong>
+    to not keel over and bite the dust.
+  </div>
+  <div class="hide" id="medium-msg">Difficulty: <strong>MEDIUM</strong><br><br>Jay needs at least <strong>3
+      pebbles</strong> to not keel
+    over and bite the
+    dust.</div>
+  <div class="hide" id="hard-msg">Difficulty: <strong>HARD</strong><br><br>Jay needs at least <strong>5 pebbles</strong>
+    to not keel over
+    and bite the dust.
+  </div>
+  <div class="game hide" id="game"></div>
+  <div class="score hide" id="score">Pebble Count: <span id="score-num">0</span></div>
+  <div class="finish hide" id="finish">
+    <p id="finish-msg">Huzzah!</p>
+    <button id="start-over">Run that shit back</button>
+  </div>
+  <script src="memory-game.js"></script>
+
+</body>
+
+</html>
