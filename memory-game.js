@@ -4,16 +4,16 @@
 
 const FOUND_MATCH_WAIT_MSECS = 500;
 const IMAGES = [
-  "Assets/Jay1.png",
-  "Assets/Jay2.png",
-  "Assets/Jay3.png",
-  "Assets/Jay4.png",
-  "Assets/Jay5.png",
-  "Assets/Jay6.png",
-  "Assets/Jay7.png",
-  "Assets/Jay8.png",
-  "Assets/Jay9.png",
-  "Assets/Jay10.png"
+  "./Assets/Jay1.png",
+  "./Assets/Jay2.png",
+  "./Assets/Jay3.png",
+  "./Assets/Jay4.png",
+  "./Assets/Jay5.png",
+  "./Assets/Jay6.png",
+  "./Assets/Jay7.png",
+  "./Assets/Jay8.png",
+  "./Assets/Jay9.png",
+  "./Assets/Jay10.png"
 ];
 
 // const images = shuffle([...IMAGES, ...IMAGES]); // Shuffled array
