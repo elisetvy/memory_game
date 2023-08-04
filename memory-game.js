@@ -2,8 +2,7 @@
 
 /** Memory game: find matching pairs of cards and flip both of them. */
 
-const FOUND_MATCH_WAIT_MSECS = 500;
-const IMAGES = [
+const IMAGES = shuffle([
   "./Assets/Jay1.png",
   "./Assets/Jay2.png",
   "./Assets/Jay3.png",
@@ -14,21 +13,17 @@ const IMAGES = [
   "./Assets/Jay8.png",
   "./Assets/Jay9.png",
   "./Assets/Jay10.png"
-];
-
-// const images = shuffle([...IMAGES, ...IMAGES]); // Shuffled array
-
-// createCards(images);
+]);
 
 const info = document.getElementById('info');
-const gameBoard = document.getElementById("game");
 const levels = document.getElementById('levels');
-const images = shuffle(IMAGES);
+const gameBoard = document.getElementById("game");
+const scoreStr = document.getElementById('score');
 let matchCount;
 
 const easy = document.getElementById("easy");
 easy.addEventListener('click', function () {
-  let shuffled = shuffle([...images.slice(0, 3), ...images.slice(0, 3)]);
+  let shuffled = shuffle([...IMAGES.slice(0, 3), ...IMAGES.slice(0, 3)]);
   createCards(shuffled);
   const easyMsg = document.getElementById('easy-msg');
   easyMsg.classList.remove('hide');
@@ -40,7 +35,7 @@ easy.addEventListener('click', function () {
 });
 const medium = document.getElementById("medium");
 medium.addEventListener('click', function () {
-  let shuffled = shuffle([...images.slice(0, 6), ...images.slice(0, 6)]);
+  let shuffled = shuffle([...IMAGES.slice(0, 6), ...IMAGES.slice(0, 6)]);
   createCards(shuffled);
   const mediumMsg = document.getElementById('medium-msg');
   mediumMsg.classList.remove('hide');
@@ -52,7 +47,7 @@ medium.addEventListener('click', function () {
 });
 const hard = document.getElementById("hard");
 hard.addEventListener('click', function () {
-  let shuffled = shuffle([...images, ...images]);
+  let shuffled = shuffle([...IMAGES, ...IMAGES]);
   createCards(shuffled);
   const hardMsg = document.getElementById('hard-msg');
   hardMsg.classList.remove('hide');
@@ -116,34 +111,27 @@ function unFlipCard(card) {
   card.style.backgroundImage = '';
 }
 
-let cardLimit = 0;
 let activeCard = null;
-let awaitingEndOfMove = "false";
+let moves = 0;
 let revealedCount = 0;
 let score = 0;
-const scoreStr = document.getElementById('score');
 const scoreNum = document.getElementById('score-num');
 
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(e) {
   // ... you need to write this ...
-  if (cardLimit === 2) {
-    return;
-  };
-
   if (e.target === activeCard || e.target.getAttribute("revealed") === "true") {
     return;
+  } else {
+    moves++;
   }
 
-  if (awaitingEndOfMove === "false") {
+  if (moves === 1) {
     flipCard(e.target);
     activeCard = e.target;
-    awaitingEndOfMove = "true";
-    cardLimit++;
-  } else {
+  } else if (moves === 2) {
     flipCard(e.target);
-    cardLimit++;
 
     if (e.target.getAttribute('class') === activeCard.getAttribute('class')) {
       e.target.classList.add('shake');
@@ -151,23 +139,22 @@ function handleCardClick(e) {
       e.target.setAttribute("revealed", "true");
       activeCard.setAttribute("revealed", "true");
       activeCard = null;
-      awaitingEndOfMove = "false";
-      cardLimit = 0;
+      moves = 0;
       revealedCount += 2;
       score++;
       scoreNum.textContent = score;
       if (revealedCount === matchCount) {
         const finish = document.getElementById('finish');
-        const startOver = document.getElementById('start-over');
-        startOver.addEventListener('click', function () {
-          location.reload();
-        });
         const finishMsg = document.getElementById('finish-msg');
         if (score < 1 && matchCount <= 6 || score < 3 && matchCount > 6 && matchCount <= 12 || score < 5 && matchCount > 12 && matchCount <= 20) {
           finishMsg.textContent = 'Jay doesn\'t have enough food to make it through the night...  You owe me a new cat!';
         } else {
           finishMsg.textContent = 'Huzzah!  Jay lives to see another day.';
         }
+        const startOver = document.getElementById('start-over');
+        startOver.addEventListener('click', function () {
+          location.reload();
+        });
         finish.classList.remove('hide');
         finish.scrollIntoView({
           behavior: 'smooth'
@@ -178,14 +165,13 @@ function handleCardClick(e) {
         unFlipCard(e.target);
         unFlipCard(activeCard);
         activeCard = null;
-        awaitingEndOfMove = "false";
-        cardLimit = 0;
+        moves = 0;
         score--;
         if (score < 0) {
           score = 0;
         }
         scoreNum.textContent = score;
-      }, FOUND_MATCH_WAIT_MSECS);
+      }, 500);
     }
   }
 }
